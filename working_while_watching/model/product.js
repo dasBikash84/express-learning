@@ -42,8 +42,11 @@ function saveProducts(products,callBack){
 
 const Product = class {
 
-    constructor(t){
+    constructor(t,url,desc,price){
         this.title = t;
+        this.imageUrl = url;
+        this.description = desc;
+        this.price = price;
     }
 
     save(callBack){

@@ -5,8 +5,9 @@
 }
 
 .product-item {
-    width: 20rem;
-    max-width: 95%;
+    width: 50%;
+    max-width: 50%;
+    align-content: center;
 }
 
 .product__title {
