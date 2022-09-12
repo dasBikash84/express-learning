@@ -50,6 +50,7 @@ const Product = class {
     }
 
     save(callBack){
+        this.id = (Math.random() * 1000).toString();
         doWithProducts((prods)=>{
             prods.push(this);
             console.log('during save',prods);
@@ -60,6 +61,12 @@ const Product = class {
 
     static fetchAll(callBack){
         return doWithProducts(callBack);
+    }
+
+    static findById(id,callBack){
+        return doWithProducts((prods)=>{
+            callBack(prods.find(prod => prod.id === id));
+        });
     }
 
 }
