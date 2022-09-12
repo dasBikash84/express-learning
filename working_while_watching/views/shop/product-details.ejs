@@ -7,10 +7,9 @@
 <main>
   <article class="card product-item">
     <%- include('../includes/article.ejs', {prod: prod}) %>
-    <form action="/cart" method="post">
-        <input type="hidden" name="productId" value="<%= prod.id %>"/>
-        <button class="btn" type="submit">Add to Cart</button>
-    </form>
+    <div class="card__actions">
+      <%- include('../includes/add-to-cart.ejs', {prod: prod}) %>
+    </div>
   </article>
 </main>
 <%- include('../includes/footer.ejs') %>

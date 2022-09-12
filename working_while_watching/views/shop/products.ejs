@@ -11,7 +11,7 @@
                 <article class="card product-item">
                     <%- include('../includes/article.ejs', {prod: prod}) %>
                     <div class="card__actions">
-                        <button class="btn">Add to Cart</button>
+                        <%- include('../includes/add-to-cart.ejs', {prod: prod}) %>
                     </div>
                 </article>
             <% } %>
