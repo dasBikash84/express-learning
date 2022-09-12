@@ -4,26 +4,52 @@
 
 <%- include('../includes/nav.ejs') %>
 
+<% 
+    function isEditMode(){
+        return prod != null;
+    }
+
+    function getProductTitle(){
+        return isEditMode() ? prod.title : '';
+    }
+
+    function getProductImageUrl(){
+        return isEditMode() ? prod.imageUrl : '';
+    }
+
+    function getProductDescription(){
+        return isEditMode() ? prod.description : '';
+    }
+
+    function getProductPrice(){
+        return isEditMode() ? prod.price : '';
+    }
+%>
+
     <main>
         <form class="product-form" action="/admin/product" method="POST">
             <div class="form-control">
                 <label for="title">Title</label>
-                <input type="text" name="title" id="title">
+                <input type="text" name="title" id="title" value="<%= getProductTitle() %>">
             </div>
             <div class="form-control">
                 <label for="imageUrl">Image URL</label>
-                <input type="text" name="imageUrl" id="imageUrl">
+                <input type="text" name="imageUrl" id="imageUrl" value="<%= getProductImageUrl() %>">
             </div>
             <div class="form-control">
                 <label for="price">Price</label>
-                <input type="number" name="price" id="price" step="0.01">
+                <input type="number" name="price" id="price" step="0.01" value="<%= getProductPrice() %>">
             </div>
             <div class="form-control">
                 <label for="description">Description</label>
-                <textarea rows="5" name="description" id="description"></textarea>
+                <textarea rows="5" name="description" id="description" required ><%= getProductDescription() %></textarea>
             </div>
-
-            <button type="submit">Add Product</button>
+            <% if(isEditMode()){ %>
+                <button type="submit">Edit Product</button>
+                <input type="hidden" name="productId" value="<%= prod.id %>"/>
+            <%}else{%>
+                <button type="submit">Add Product</button>
+            <%}%>
         </form>
     </main>
 <%- include('../includes/footer.ejs') %>
