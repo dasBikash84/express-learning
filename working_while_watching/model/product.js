@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { Cart } = require('./Cart');
 
 
 const products = [];
@@ -25,7 +26,6 @@ function doWithProducts(callBack){
             }
             
         }
-        console.log('curProducts',curProducts);
         callBack(curProducts);
     });
 }
@@ -53,7 +53,6 @@ const Product = class {
     save(callBack){
         doWithProducts((prods)=>{
             prods.push(this);
-            console.log('during save',prods);
             saveProducts(prods,callBack);
         });
         // products.push(this);
@@ -63,7 +62,6 @@ const Product = class {
         doWithProducts((prods)=>{
             const newProds = prods.filter(prod=> prod.id !== this.id);
             newProds.push(this);
-            console.log('during save',newProds);
             saveProducts(newProds,callBack);
         });
         // products.push(this);
@@ -81,9 +79,11 @@ const Product = class {
 
     static deleteById(id,callBack){
         return doWithProducts((prods)=>{
+            const currentProd = prods.find(prod=> prod.id === id);
             const newProds = prods.filter(prod=> prod.id !== id);
-            console.log('during save',newProds);
-            saveProducts(newProds,callBack);
+            saveProducts(newProds,()=>{
+                Cart.deleteProduct(currentProd.id,currentProd.price,callBack);
+            });
         });
     }
 

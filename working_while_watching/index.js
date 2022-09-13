@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use((req,res,next)=>{
-    console.log(`Gen middleware for path: ${req.url}`);
+    console.log(`${req.method} : ${req.url}`);
+    console.log("req body: ",req.body);
     req.rootDir = path.join(__dirname);
     req.viewsDir = path.join(__dirname,'views');
     next();

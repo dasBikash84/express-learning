@@ -1,5 +1,25 @@
 <%- include('../includes/header.ejs') %>
+<link rel="stylesheet" href="/css/forms.css" />
+<link rel="stylesheet" href="/css/product.css" />
+
 
 <%- include('../includes/nav.ejs') %>
-    <h1>Cart</h1>
+
+    <% if(!cart || cart.products.length == 0){%>
+        <h1>No product on cart!!</h1>
+    <%}else{%>
+        <ul>
+            <% for(prod of cart.products) {%>
+                <li>
+                    <%= `${prod.title} (${prod.qty})` %>
+                    <a href="/delete-card-item/<%= prod.id %>" class="btn">Delete</a>
+                    <div class="card__actions">
+                    </div>
+                </li>
+            <%} %>
+        </ul>
+        <hr/>
+        <h2>Total : <%= cart.totalPrice%></h2>
+    <%} %>
+
 <%- include('../includes/footer.ejs') %>

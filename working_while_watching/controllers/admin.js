@@ -1,3 +1,5 @@
+const { Cart } = require("../model/Cart");
+
 const Product = require("../model/product").Product;
 
 exports.getAddProduct = (req, res, next) => {
@@ -34,7 +36,6 @@ exports.getDeleteProduct = (req, res, next) => {
 
 exports.getAllAdminProducts = (req, res, next) => {
   Product.fetchAll((prods) => {
-    console.log("From getAllAdminProducts", prods);
     res.render("admin/admin-products", {
       prods: prods,
       pageTitle: "Admin Products",
